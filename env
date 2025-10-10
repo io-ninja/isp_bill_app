@@ -1,0 +1,201 @@
+#--------------------------------------------------------------------
+# Example Environment Configuration file
+#
+# This file can be used as a starting point for your own
+# custom .env files, and contains most of the possible settings
+# available in a default install.
+#
+# By default, all of the settings are commented out. If you want
+# to override the setting, you must un-comment it by removing the '#'
+# at the beginning of the line.
+#--------------------------------------------------------------------
+
+#--------------------------------------------------------------------
+# ENVIRONMENT
+#--------------------------------------------------------------------
+
+CI_ENVIRONMENT = development
+
+#--------------------------------------------------------------------
+# APP
+#--------------------------------------------------------------------
+
+app.baseURL = 'http://localhost'
+app.indexPage = ''
+# If you have trouble with `.`, you could also use `_`.
+# app_baseURL = ''
+app.forceGlobalSecureRequests = false
+# app.CSPEnabled = false
+
+#--------------------------------------------------------------------
+# DATABASE
+#--------------------------------------------------------------------
+
+database.default.hostname = db-mysql-o1.io-o0.my.id
+database.default.database = ispbill_db
+database.default.username = root
+database.default.password = rootTitikKoma123!
+database.default.DBDriver = MySQLi
+database.default.port = 3307
+# database.default.DBPrefix =
+
+# If you use MySQLi as tests, first update the values of Config\Database::$tests.
+# database.tests.hostname = localhost
+# database.tests.database = ci4_test
+# database.tests.username = root
+# database.tests.password = root
+# database.tests.DBDriver = MySQLi
+# database.tests.DBPrefix =
+# database.tests.charset = utf8mb4
+# database.tests.DBCollat = utf8mb4_general_ci
+# database.tests.port = 3306
+
+#--------------------------------------------------------------------
+# ENCRYPTION
+#--------------------------------------------------------------------
+
+encryption.key = hex2bin:3caba1a2410b75417b8ba557b67f999e2cce72f899a1fd6da1ac368bc56ee380
+#--------------------------------------------------------------------
+# SESSION
+#--------------------------------------------------------------------
+
+# session.driver = 'CodeIgniter\Session\Handlers\FileHandler'
+# session.savePath = null
+
+#--------------------------------------------------------------------
+# LOGGER
+#--------------------------------------------------------------------
+
+# logger.threshold = 4
+
+# ------------------------
+
+# app.CSRFProtection = true
+# app.CSRFTokenName = 'x_token'
+# app.CSRFHeaderName = 'X-TOKEN'
+# app.CSRFCookieName = 'ci_cookies'
+# app.CSRFExpire = 7200
+# app.CSRFRegenerate = true
+# app.CSRFRedirect = true
+# app.CSRFSamesite = 'Lax'
+
+app.CSRFProtection = true
+app.CSRFTokenName  = 'csrf_token_name'
+app.CSRFCookieName = 'csrf_cookie_name'
+app.CSRFExpire = 28800
+app.CSRFRegenerate = false
+app.CSRFRedirect = false
+app.CSRFSamesite = 'Lax'
+
+# app.CSRFCookieName = 'ci_cookies'
+# app.CSRFExpire = 7200
+# app.CSRFExpire = 7200
+# make it to 8 hours
+# app.CSRFExcludeURIs = []
+# app.CSPEnabled = false
+
+#--------------------------------------------------------------------
+# CONTENT SECURITY POLICY
+#--------------------------------------------------------------------
+
+# contentsecuritypolicy.reportOnly = false
+# contentsecuritypolicy.defaultSrc = 'none'
+# contentsecuritypolicy.scriptSrc = 'self'
+# contentsecuritypolicy.styleSrc = 'self'
+# contentsecuritypolicy.imageSrc = 'self'
+# contentsecuritypolicy.base_uri = null
+# contentsecuritypolicy.childSrc = null
+# contentsecuritypolicy.connectSrc = 'self'
+# contentsecuritypolicy.fontSrc = null
+# contentsecuritypolicy.formAction = null
+# contentsecuritypolicy.frameAncestors = null
+# contentsecuritypolicy.mediaSrc = null
+# contentsecuritypolicy.objectSrc = null
+# contentsecuritypolicy.pluginTypes = null
+# contentsecuritypolicy.reportURI = null
+# contentsecuritypolicy.sandbox = false
+# contentsecuritypolicy.upgradeInsecureRequests = false
+
+#--------------------------------------------------------------------
+# HONEYPOT
+#--------------------------------------------------------------------
+
+#  honeypot.hidden = 'true'
+#  honeypot.label = 'Fill This Field'
+#  honeypot.name = 'honeypot'
+#  honeypot.template = '<label>{label}</label><input type="text" name="{name}" value=""/>'
+
+#--------------------------------------------------------------------
+# RECAPTCHA PROPERTIES
+#--------------------------------------------------------------------
+RECAPTCHA_SITE_KEY = '6Leo_UspAAAAAPCNIA3FvfsQbip3-S3Qo2JjF_-V'
+RECAPTCHA_SECRET_KEY = '6Leo_UspAAAAAD3raqZ3BZDNtLk2utOX5q_yM2An'
+
+#JWT
+jwt.secretkey= '539951a2f84941b5c0a23fbb35b628aae30b686fd138ace176ff3f1c0cbb100'
+jwt.ttl = 3600
+jwt.refresh_ttl = 7200
+
+#--------------------------------------------------------------------
+# APPLICATION PROPERTIES
+#--------------------------------------------------------------------
+APP_NAMESPACE = "-"
+prop.appname = "-"
+prop.appdesc = "-"
+prop.appshortdesc = "-"
+prop.appauthor = "ME"
+prop.applogo = "/favicon.ico"
+prop.applogooperated = "/assets/img/hubdat.png"
+prop.apploginbg = ""
+prop.applogofull = "/favicon.ico"
+prop.favicon = "/favicon.ico"
+prop.primarycolor = "#007bff"
+
+# TELEGRAM_BOT_TOKEN="1769998926:AAF6SSk6lXAWbUMSK1M0OvvT8XZVCwzODWQ"
+# TELEGRAM_CHAT_ID="-1001370374908"
+# TELEGRAM_BOT_TOKEN="7111713513:AAFk_3Ug8WcM13OQrsATZmBt32PoJ3UTIHg"
+# TELEGRAM_CHANNEL_ID="-1002435346687"
+
+# apps
+prop.BASE_URL_STREAM_CCTV=https://stream-jatim-dev.tetrans.id
+
+prop.DEFAULT_LATITUDE="-7.257241"
+prop.DEFAULT_LONGITUDE="112.73726"
+prop.DEFAULT_CITY="Jawa Timur, Indoneisa"
+
+# https://gps.brtnusantara.com/dev
+prop.BASE_URL_WHATSAPP_SERVICE=http://127.0.0.1:3000
+prop.API_KEY_WHATSAPP_SERVICE=9da8b5054be143f99e1fca86be0e3ad5
+prop.BASE_URL_NGI_GPS=https://gps.brtnusantara.com
+prop.BASE_URL_NGI=https://devel74.nginovasi.id/akdpjatim
+prop.NGI_USER="jtcc@mail.com"
+prop.NGI_PASS="jatimjtcc99"
+
+prop.PUSHER_APP_ID=1808731
+prop.PUSHER_APP_KEY=ecb15884828a012229c8
+prop.PUSHER_APP_SECRET=bc4d3f5ede97b4d3b95e
+prop.PUSHER_HOST=
+prop.PUSHER_PORT=443
+prop.PUSHER_SCHEME=https
+prop.PUSHER_APP_CLUSTER=ap1
+
+prop.BROADCAST_DRIVER=pusher
+
+# storage
+prop.FILESYSTEM_DISK=minio
+prop.MINIO_ACCESS_KEY_ID=AXDmTeagjure58e9sbNj
+prop.MINIO_SECRET_ACCESS_KEY=HK9QHWAJxPqMjQzI5TZQLuyj6aFR9GiJ6HpQDvdU
+prop.MINIO_DEFAULT_REGION=us-east-1
+prop.MINIO_BUCKET=thishub-jatim
+prop.MINIO_URL=https://object-storage.nginovasi.id
+prop.MINIO_ENDPOINT=https://object-storage.nginovasi.id
+
+# mailer
+prop.MAIL_MAILER=smtp
+prop.MAIL_HOST=sandbox.smtp.mailtrap.io
+prop.MAIL_PORT=2525
+prop.MAIL_USERNAME=0369c017333ecb
+prop.MAIL_PASSWORD=aba37299e23651
+prop.MAIL_ENCRYPTION=tls
+prop.MAIL_FROM_ADDRESS=smkdigitaljawatimur@gmail.com
+prop.MAIL_FROM_NAME=SMKDIGITAL
