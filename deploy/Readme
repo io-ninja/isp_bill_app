@@ -1,0 +1,79 @@
+1.
+# -f deploy/Dockerfile -> nunjukin lokasi Dockerfile
+# . -> build context-nya adalah folder saat ini (project-kamu)
+docker build --no-cache -f deploy/Dockerfile -t nginx-php-ssh .
+
+# docker run -p 8080:80 -p 2222:22 -d --name my-app nginx-php-ssh
+
+
+# Build Docker Image
+# docker build -t -c -f deploy/Dockerfile ascaliko/nginx-ssh .
+docker tag nginx-php-ssh ascaliko/nginx-php-ssh:latest
+#<!-- docker build -t ascaliko/nginx-ssh-volume . -->
+#<!-- docker build -t your-dockerhub-username/nginx-ssh-volume . -->
+
+# Push ke Docker Hub
+docker login
+docker push ascaliko/nginx-php-ssh
+
+# run container
+<!-- docker run -d \
+  --name nginx-ssh-container \
+  -p 8080:80 \
+  -p 2222:22 \
+  ascaliko/nginx-ssh -->
+
+# Jalankan Container dengan Volume
+# Opsi A: Menggunakan Named Volume (Rekomendasi)
+docker run -d \
+  --name nginx-ssh-container \
+  -p 8080:80 \
+  -p 2222:22 \
+  -v nginx_config:/data/nginx_config \
+  -v nginx_html:/data/nginx_html \
+  -v ssh_keys:/data/ssh_keys \
+  ascaliko/nginx-ssh
+
+# Opsi B: Menggunakan Bind Mount (Untuk Development)
+docker run --rm --name temp-nginx \
+  -v /Users/ascaliko/Ascaliko/Programming/Projects/ngi/docker_swarm_conf/nginx_ssh/nginx_config:/etc/nginx \
+  -v /Users/ascaliko/Ascaliko/Programming/Projects/ngi/docker_swarm_conf/nginx_ssh/nginx_html:/usr/share/nginx/html \
+  ascaliko/nginx-ssh \
+  sh -c "cp -r /data/nginx_config/* /etc/nginx/ && cp -r /data/nginx_html/* /usr/share/nginx/html/"
+
+docker run -d \
+  --name nginx-ssh-container \
+  -p 8080:80 \
+  -p 2222:22 \
+  -v /Users/ascaliko/Ascaliko/Programming/Projects/ngi/docker_swarm_conf/nginx_ssh/nginx_config:/etc/nginx \
+  -v /Users/ascaliko/Ascaliko/Programming/Projects/ngi/docker_swarm_conf/nginx_ssh/nginx_html:/usr/share/nginx/html \
+  -v /Users/ascaliko/Ascaliko/Programming/Projects/ngi/docker_swarm_conf/nginx_ssh/ssh_keys:/data/ssh_keys \
+  ascaliko/nginx-ssh
+
+# Akses Nginx
+http://localhost:8080
+
+# Akses SSH
+ssh root@app-o1.io-o0.my.id -p 2222
+password: Nusantaradev123!
+
+# akun
+ascaliko
+Nusantaradockerdev123!
+# akses token pat
+docker login -u ascaliko
+# dckr_pat_4KXKH3W2v_uZb9AEA_SBeJWXBJA
+
+
+
+# docker hub
+# ascaliko
+# Nusantaradockerdev123!
+
+# docker login -u ascaliko
+# dckr_pat_4KXKH3W2v_uZb9AEA_SBeJWXBJA
+
+# https://eoffice.nginovasi.id/
+
+# ssh nginovasidev@eoffice.nginovasi.id -p 2222
+# Nusantaradev123!
