@@ -1,0 +1,6 @@
+# Hapus baris 'deploy/' dari sini
+.git
+.gitignore
+README.md
+Dockerfile*
+docker-compose*

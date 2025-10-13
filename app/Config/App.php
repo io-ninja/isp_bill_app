@@ -16,7 +16,7 @@ class App extends BaseConfig
      *
      * E.g., http://example.com/
      */
-    public string $baseURL = 'http://localhost:8080/';
+    public string $baseURL;
     // public string $baseURL = 'http://localhost:8080/';
 
     /**
@@ -200,4 +200,19 @@ class App extends BaseConfig
      * @see http://www.w3.org/TR/CSP/
      */
     public bool $CSPEnabled = false;
+    
+    public function __construct()
+    {
+        parent::__construct();
+    
+        // Pakai environment variable kalau ada
+        $this->baseURL = getenv('APP_BASE_URL') ?: 'http://localhost:8080/';
+    
+        // Pastikan diakhiri slash
+        if (substr($this->baseURL, -1) !== '/') {
+            $this->baseURL .= '/';
+        }
+    }
+
+
 }
