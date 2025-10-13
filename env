@@ -128,11 +128,11 @@ app.CSRFSamesite = 'Lax'
 #--------------------------------------------------------------------
 # RECAPTCHA PROPERTIES
 #--------------------------------------------------------------------
-RECAPTCHA_SITE_KEY = '6Leo_UspAAAAAPCNIA3FvfsQbip3-S3Qo2JjF_-V'
-RECAPTCHA_SECRET_KEY = '6Leo_UspAAAAAD3raqZ3BZDNtLk2utOX5q_yM2An'
+RECAPTCHA_SITE_KEY = ''
+RECAPTCHA_SECRET_KEY = ''
 
 #JWT
-jwt.secretkey= '539951a2f84941b5c0a23fbb35b628aae30b686fd138ace176ff3f1c0cbb100'
+jwt.secretkey= ''
 jwt.ttl = 3600
 jwt.refresh_ttl = 7200
 
