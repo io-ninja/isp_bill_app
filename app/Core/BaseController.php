@@ -692,4 +692,87 @@ class BaseController extends Controller
 
 		return $result;
 	}
+
+	/**
+	 * Memproses upload satu file.
+	 * Fungsi ini mengembalikan array hasil, bukan mencetak JSON.
+	 *
+	 * @param \CodeIgniter\Files\File $file Objek file dari CodeIgniter
+	 * @param string $folder Folder tujuan di dalam 'uploads'
+	 * @return array Array berisi status sukses/error dan data file
+	 */
+	public function _uploadFile(\CodeIgniter\Files\File $file, string $folder)
+	{
+		// 1. Validasi File
+		if (!$file->isValid()) {
+			return ['success' => false, 'error' => $file->getErrorString() . '(' . $file->getError() . ')'];
+		}
+	
+		$allowedTypes = [
+			'application/pdf',
+			'image/png',
+			'image/jpeg',
+			'image/jpg',
+			'image/webp' // Gue tambahin webp biar kekinian
+		];
+		$maxSize = 15 * 1024 * 1024; // 15MB
+	
+		if (!in_array($file->getClientMimeType(), $allowedTypes)) {
+			return ['success' => false, 'error' => 'Tipe file tidak diizinkan. Hanya PDF, PNG, JPG, JPEG, dan WEBP.'];
+		}
+	
+		if ($file->getSize() > $maxSize) {
+			return ['success' => false, 'error' => 'Ukuran file melebihi batas maksimal 15MB.'];
+		}
+	
+		// 2. Siapkan Path dan Nama File Baru
+		$uploadPath = PUBLICPATH . 'uploads/' . $folder;
+		// $uploadPath = WRITEPATH . 'uploads/' . $folder;
+	
+		// Buat folder jika belum ada
+		if (!is_dir($uploadPath)) {
+			if (!mkdir($uploadPath, 0755, true)) {
+				return ['success' => false, 'error' => 'Gagal membuat folder tujuan.'];
+			}
+		}
+	
+		// 3. Pindahkan File
+		$newName = $file->getRandomName();
+		
+		if ($file->move($uploadPath, $newName)) {
+			// Sukses! Kembalikan data file.
+			// Path yang disimpan sebaiknya relatif dari `uploads` atau URL-nya.
+			$fileUrl = base_url('public/uploads/' . $folder . '/' . $newName);
+			return [
+				'success' => true,
+				'filename' => $newName,
+				'path' => $folder . '/' . $newName, // path relatif
+				'full_path' => $uploadPath . '/' . $newName, // path server
+				'url' => $fileUrl,
+				'size' => $file->getSize()
+			];
+		} else {
+			// Gagal memindahkan file
+			return ['success' => false, 'error' => 'Gagal mengunggah file ke server.'];
+		}
+	}
+
+	public function _removeFile($filename, $folder)
+	{
+		$filename = $this->request->getPost('filename');
+		$folder = $this->request->getPost('folder');
+
+		$filePath = PUBLICPATH . 'uploads/' . $folder . '/' . $filename;
+
+		$return = [];
+		if (file_exists($filePath)) {
+			unlink($filePath);
+			$return = ['success' => true];
+		} else {
+			$return = ['success' => false, 'error' => 'File tidak ditemukan'];
+		}
+
+		$this->response->setHeader('Content-Type', 'application/json');
+		echo json_encode($return);
+	}
 }
