@@ -38,7 +38,7 @@ class ApiPublic extends BaseController
 		$files = $this->request->getFiles();
 		
 		// Tentukan folder tujuan, dengan fallback ke folder default
-		$folder = $this->request->getPost('folder') ?? 'tradisi/files';
+		$folder = $this->request->getPost('folder') ?? 'apps/files';
 	
 		// Cek apakah ada file yang dikirim
 		if (empty($files)) {
@@ -90,7 +90,7 @@ class ApiPublic extends BaseController
 	{
 		$filename = $this->request->getPost('filename');
 		$folder = $this->request->getPost('folder');
-		$folder_default = 'tradisi/images';
+		$folder_default = 'apps/images';
 		$folder = isset($folder) ? $folder : $folder_default;
 		// Log payload untuk debug
 		log_message('debug', 'Remove Payload: ' . print_r($this->request->getPost(), true));

@@ -263,13 +263,18 @@ class BaseController extends Controller
 		if ($orderby && !isset($order)) {
 			$orderBy = implode(", ", $orderby);
 		} else {
-			$orderByItems = array_map(function ($orderItem) use ($columns) {
-				$colIndex = $orderItem["column"];
-				$colDir = $orderItem["dir"];
-				$colName = $columns[$colIndex]["data"];
-				return $colName . " " . strtoupper($colDir);
-			}, $order);
-			$orderBy = implode(", ", $orderByItems);
+			$orderBy = [];
+			if (!is_null($orderby) && $order[0]['column'] == 0) {
+				$orderBy = implode(", ", $orderby);
+			} else {
+				$orderByItems = array_map(function ($orderItem) use ($columns) {
+					$colIndex = $orderItem["column"];
+					$colDir = $orderItem["dir"];
+					$colName = $columns[$colIndex]["data"];
+					return $colName . " " . strtoupper($colDir);
+				}, $order);
+				$orderBy = implode(", ", $orderByItems);
+			}
 		}
 
 		$result = $this->baseModel->base_load_datatable($query, $where, $key, $start, $length, $orderBy, $groupby);
